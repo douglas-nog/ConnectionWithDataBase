@@ -1,0 +1,15 @@
+package br.com.fintech.teste;
+
+import br.com.fintech.dao.OracleUsuarioDAO;
+
+public class TesteListagemUsuario {
+
+	public static void main(String[] args) {
+		
+		OracleUsuarioDAO dao = new OracleUsuarioDAO();
+		
+		dao.listar();
+
+	}
+
+}

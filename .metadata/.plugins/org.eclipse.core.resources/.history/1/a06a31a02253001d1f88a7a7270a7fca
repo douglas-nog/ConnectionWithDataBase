@@ -1,0 +1,176 @@
+package br.com.fintech.dao;
+
+import java.sql.Connection;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import br.com.fintech.bean.Receita;
+import br.com.fintech.jdbc.FintechDBManager;
+
+public class OracleReceitaDAO implements ReceitaDAO{
+
+	private Connection conexao;
+	
+	public void Cadastrar(Receita receita) {
+		PreparedStatement stmt = null;
+		
+		try {
+			conexao = FintechDBManager.obterConexao();
+			String sql = "INSERT INTO T_RECEITA(CD_RECEITA, T_USUARIO_NR_CPF, T_TIPO_CD_TIPO, DS_RECEITA, VL_RECEITA, DT_RECEITA, DS_RECORRENCIA, NR_QTD_REPETICAO) VALUES (SQ_RECEITA.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
+			stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, receita.getCpf());
+			stmt.setInt(2, receita.getTipo());
+			stmt.setString(3, receita.getDescricao());
+			stmt.setDouble(4, receita.getValor_receita());
+			java.sql.Date data = new java.sql.Date(receita.getData_receita().getTimeInMillis());
+			stmt.setDate(5, data);
+			stmt.setString(6, receita.getRecorrencia());
+			stmt.setInt(1, receita.getQtd_repeticao());
+			
+			
+			
+			stmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				conexao.close();
+			}catch (SQLException e) {
+				e.printStackTrace();	
+			}
+		}
+	}
+	
+	public List <Receita> listar(){
+		List<Receita> lista = new ArrayList<Receita>();
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		
+		try {
+			conexao = FintechDBManager.obterConexao();
+		stmt = conexao.prepareStatement("SELECT * FROM T_RECEITA");
+		result = stmt.executeQuery();
+		
+		while(result.next()) {
+			int codigo = result.getInt("CD_FUNCIONARIO");
+			String nome = result.getString("NM_FUNCIONARIO");
+			String email = result.getString("DS_EMAIL");
+			double salario = result.getDouble("VL_SALARIO");
+			java.sql.Date data = result.getDate("DT_CONTRATACAO");
+			Calendar dataContratacao = Calendar.getInstance();
+			dataContratacao.setTimeInMillis(data.getTime());
+			Funcionario funcionario = new Funcionario(codigo, nome, email, salario, dataContratacao);
+			
+			lista.add(funcionario);
+			}		
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				conexao.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return lista;
+		}
+	
+	public void remover(int codigo) {
+		PreparedStatement stmt = null;
+		
+		try {
+			conexao = EmpresaDBManager.obterConexao();
+			String sql = "DELETE FROM T_FUNCIONARIO WHERE CD_FUNCIONARIO = ?";
+			stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, codigo);
+			stmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				stmt.close();
+				conexao.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			}
+		}
+	}
+	
+	public Receita buscaPorCD(int codigoBusca) {
+		
+		Receita recetia = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		
+		try {
+			conexao = FintechDBManager.obterConexao();
+			stmt = conexao.prepareStatement("SELECT * FROM T_RECEITA WHERE CD_FUNCIONARIO = ?");
+			stmt.setInt(1, codigoBusca);
+			result = stmt.executeQuery();
+			
+			if(result.next()) {
+				int codigo = result.getInt("CD_FUNCIONARIO");
+				String nome = result.getString("NM_FUNCIONARIO");
+				String email = result.getString("DS_EMAIL");
+				double salario = result.getDouble("VL_SALARIO");
+				java.sql.Date data = result.getDate("DT_CONTRATACAO");
+				Calendar dataContratacao = Calendar.getInstance();
+				dataContratacao.setTimeInMillis(data.getTime());
+				receita = new Receita(codigo, nome, email, salario, dataContratacao);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				conexao.close();
+				stmt.close();
+				result.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	return receita;
+	//System.out.println(funcionario.getCodigo()+ " " + funcionario.getNome() + " " + funcionario.getEmail() + " " + funcionario.getSalario() + " " + funcionario.getDataContratacao().getTime());
+
+	}
+	
+	public void atualizar(Receita receita) {
+		PreparedStatement stmt = null;
+		
+		try {
+			conexao = FintechDBManager.obterConexao();
+			String sql = "UPDATE T_FUNCIONARIO SET NM_FUNCIONARIO = ?, DS_EMAIL = ?, VL_SALARIO = ?, DT_CONTRATACAO = ? WHERE CD_FUNCIONARIO = ?";
+			String sql = "UPDATE T_RECEITA (CD_RECEITA, T_USUARIO_NR_CPF, T_TIPO_CD_TIPO, DS_RECEITA, VL_RECEITA, DT_RECEITA, DS_RECORRENCIA, NR_QTD_REPETICAO) VALUES (SQ_RECEITA.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
+			stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, receita.getCpf());
+			stmt.setInt(2, receita.getTipo());
+			stmt.setString(3, receita.getDescricao());
+			stmt.setDouble(4, receita.getValor_receita());
+			java.sql.Date data = new java.sql.Date(receita.getData_receita().getTimeInMillis());
+			stmt.setDate(5, data);
+			stmt.setString(6, receita.getRecorrencia());
+			stmt.setInt(1, receita.getQtd_repeticao());
+			
+			stmt.executeUpdate();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				conexao.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}

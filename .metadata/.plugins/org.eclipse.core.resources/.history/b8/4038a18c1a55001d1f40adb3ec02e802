@@ -1,0 +1,21 @@
+package br.com.fintech.teste;
+
+import br.com.fintech.bean.Usuario;
+import br.com.fintech.dao.OracleUsuarioDAO;
+
+public class TesteAlteracaoUsuario {
+
+	public static void main(String[] args) {
+
+
+		OracleUsuarioDAO dao = new OracleUsuarioDAO();
+		
+		Usuario usuario = dao.buscaPorCPF("07855659900");
+		
+		usuario.setSobrenome("Javeiro");
+		
+		
+
+	}
+
+}

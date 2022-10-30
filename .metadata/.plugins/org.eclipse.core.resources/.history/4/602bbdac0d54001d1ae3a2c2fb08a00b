@@ -1,0 +1,24 @@
+package br.com.fintech.teste;
+
+import java.util.Calendar;
+
+import br.com.fintech.bean.Receita;
+import br.com.fintech.dao.OracleReceitaDAO;
+
+public class TesteAlteracao {
+
+	public static void main(String[] args) {
+		
+		
+		OracleReceitaDAO dao = new OracleReceitaDAO();
+		
+		Receita receita1 = new Receita();
+		
+		receita1.setDescricao("Lanchão");
+		
+		
+		dao.atualizar(receita1);
+
+	}
+
+}

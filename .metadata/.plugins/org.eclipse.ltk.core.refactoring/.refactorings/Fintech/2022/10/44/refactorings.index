@@ -1,0 +1,18 @@
+1666561071965	Delete element
+1666561525326	Rename type 'REceita'
+1666561777473	Delete element
+1666562642954	Rename package 'com.br.fintech.jdbc'
+1666563417721	Encapsulate field 'cpf'
+1666563421678	Encapsulate field 'tipo'
+1666664489960	Delete element
+1666708945522	Delete element
+1666709457576	Rename type 'TesteCadastro'
+1666709467495	Rename type 'TesteAlteracao'
+1666709477124	Rename type 'TesteListagem'
+1666743917795	Convert local variable 'result' to field
+1666782197857	Rename local variable 'despesa2'
+1666782271605	Rename local variable 'despesa2'
+1666782425602	Rename local variable 'despesa4'
+1666782788936	Rename type 'TesteListagemReceita'
+1666782818263	Rename type 'TesteListagem'
+1666783095180	Rename local variable 'despesa5'

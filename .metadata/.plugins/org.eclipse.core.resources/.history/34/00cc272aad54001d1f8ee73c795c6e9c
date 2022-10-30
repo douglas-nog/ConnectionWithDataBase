@@ -1,0 +1,25 @@
+package br.com.fintech.teste;
+
+import br.com.fintech.bean.Usuario;
+import br.com.fintech.dao.OracleUsuarioDAO;
+
+public class TesteCadastroUsuario {
+	
+	
+	public static void main(String[] args) {
+		
+	OracleUsuarioDAO dao = new OracleUsuarioDAO();
+	
+	Usuario usuario1 = new Usuario();
+	
+	usuario1.setCpf("05689756400");
+	usuario1.setNome("Ayrton");
+	usuario1.setSobrenome("Cabral");
+	usuario1.setEmail("ayrtoncabral@hotmail.com");
+	usuario1.setSenha("123abc");
+	
+	
+	
+	}
+
+}

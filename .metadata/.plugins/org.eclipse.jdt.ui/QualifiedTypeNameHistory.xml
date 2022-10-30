@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="br.com.fintech.dao.ReceitaDAO"/>
+    <fullyQualifiedTypeName name="com.br.fintech.jdbc.FintechDBManager"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="br.com.fintech.dao.OracleReceitaDAO"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="br.com.fintech.jdbc.FintechDBManager"/>
+    <fullyQualifiedTypeName name="br.com.fintech.bean.Receita"/>
+    <fullyQualifiedTypeName name="br.com.fintech.dao.DespesaDAO"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="br.com.fintech.dao.UsuarioDAO"/>
+    <fullyQualifiedTypeName name="java.util.Calendar"/>
+    <fullyQualifiedTypeName name="br.com.fintech.bean.Despesa"/>
+    <fullyQualifiedTypeName name="br.com.fintech.dao.OracleDespesaDAO"/>
+    <fullyQualifiedTypeName name="br.com.fintech.dao.OracleUsuarioDAO"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="br.com.fintech.bean.Usuario"/>
+</qualifiedTypeNameHistroy>

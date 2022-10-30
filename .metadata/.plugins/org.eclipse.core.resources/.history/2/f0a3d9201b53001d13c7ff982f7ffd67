@@ -1,0 +1,5 @@
+package com.br.fintech.jdbc;
+
+public class FintechDBManager {
+
+}

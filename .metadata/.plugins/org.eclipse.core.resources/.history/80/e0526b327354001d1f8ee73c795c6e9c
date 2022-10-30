@@ -1,0 +1,16 @@
+package br.com.fintech.bean;
+
+import java.util.Calendar;
+
+public class Despesa {
+	
+	private int codigo;
+	private String cpf;
+	private int tipo;
+	private String descricao;
+    private double valor_despesa;
+    private Calendar data_despesa;
+    private String recorrencia;
+    private int qtd_repeticao;
+
+}

@@ -1,0 +1,16 @@
+package br.com.fintech.teste;
+
+import br.com.fintech.dao.OracleDespesaDAO;
+
+public class TesteDleteDespesa {
+
+	public static void main(String[] args) {
+
+
+		OracleDespesaDAO dao = new OracleDespesaDAO();
+		
+		dao.remover(26);
+
+	}
+
+}

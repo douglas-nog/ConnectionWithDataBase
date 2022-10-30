@@ -1,0 +1,168 @@
+package br.com.fintech.dao;
+
+import java.sql.Connection;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import br.com.fintech.bean.Receita;
+import br.com.fintech.jdbc.FintechDBManager;
+
+public class OracleReceitaDAO implements ReceitaDAO{
+
+	private Connection conexao;
+	
+	public void Cadastrar(Funcionario funcionario) {
+		PreparedStatement stmt = null;
+		
+		try {
+			conexao = EmpresaDBManager.obterConexao();
+			String sql = "INSERT INTO T_FUNCIONARIO(CD_FUNCIONARIO, NM_FUNCIONARIO, DS_EMAIL, VL_SALARIO, DT_CONTRATACAO) VALUES (SQ_FUNCIONARIO.NEXTVAL, ?, ?, ?, ?)";
+			stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, funcionario.getNome());
+			stmt.setString(2, funcionario.getEmail());
+			stmt.setDouble(3, funcionario.getSalario());
+			java.sql.Date data = new java.sql.Date(funcionario.getDataContratacao().getTimeInMillis());
+			stmt.setDate(4, data);
+			
+			stmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				conexao.close();
+			}catch (SQLException e) {
+				e.printStackTrace();	
+			}
+		}
+	}
+	
+	public List <Funcionario> listar(){
+		List<Funcionario> lista = new ArrayList<Funcionario>();
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		
+		try {
+			conexao = EmpresaDBManager.obterConexao();
+		stmt = conexao.prepareStatement("SELECT * FROM T_FUNCIONARIO");
+		result = stmt.executeQuery();
+		
+		while(result.next()) {
+			int codigo = result.getInt("CD_FUNCIONARIO");
+			String nome = result.getString("NM_FUNCIONARIO");
+			String email = result.getString("DS_EMAIL");
+			double salario = result.getDouble("VL_SALARIO");
+			java.sql.Date data = result.getDate("DT_CONTRATACAO");
+			Calendar dataContratacao = Calendar.getInstance();
+			dataContratacao.setTimeInMillis(data.getTime());
+			Funcionario funcionario = new Funcionario(codigo, nome, email, salario, dataContratacao);
+			
+			lista.add(funcionario);
+			}		
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				conexao.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return lista;
+		}
+	
+	public void remover(int codigo) {
+		PreparedStatement stmt = null;
+		
+		try {
+			conexao = EmpresaDBManager.obterConexao();
+			String sql = "DELETE FROM T_FUNCIONARIO WHERE CD_FUNCIONARIO = ?";
+			stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, codigo);
+			stmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				stmt.close();
+				conexao.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			}
+		}
+	}
+	
+	public Funcionario buscaPorCD(int codigoBusca) {
+		
+		Funcionario funcionario = null;
+		PreparedStatement stmt = null;
+		ResultSet result = null;
+		
+		try {
+			conexao = EmpresaDBManager.obterConexao();
+			stmt = conexao.prepareStatement("SELECT * FROM T_FUNCIONARIO WHERE CD_FUNCIONARIO = ?");
+			stmt.setInt(1, codigoBusca);
+			result = stmt.executeQuery();
+			
+			if(result.next()) {
+				int codigo = result.getInt("CD_FUNCIONARIO");
+				String nome = result.getString("NM_FUNCIONARIO");
+				String email = result.getString("DS_EMAIL");
+				double salario = result.getDouble("VL_SALARIO");
+				java.sql.Date data = result.getDate("DT_CONTRATACAO");
+				Calendar dataContratacao = Calendar.getInstance();
+				dataContratacao.setTimeInMillis(data.getTime());
+				funcionario = new Funcionario(codigo, nome, email, salario, dataContratacao);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				conexao.close();
+				stmt.close();
+				result.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	return funcionario;
+	//System.out.println(funcionario.getCodigo()+ " " + funcionario.getNome() + " " + funcionario.getEmail() + " " + funcionario.getSalario() + " " + funcionario.getDataContratacao().getTime());
+
+	}
+	
+	public void atualizar(Funcionario funcionario) {
+		PreparedStatement stmt = null;
+		
+		try {
+			conexao = EmpresaDBManager.obterConexao();
+			String sql = "UPDATE T_FUNCIONARIO SET NM_FUNCIONARIO = ?, DS_EMAIL = ?, VL_SALARIO = ?, DT_CONTRATACAO = ? WHERE CD_FUNCIONARIO = ?";
+			stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, funcionario.getNome());
+			stmt.setString(2, funcionario.getEmail());
+			stmt.setDouble(3, funcionario.getSalario());
+			java.sql.Date data = new java.sql.Date(funcionario.getDataContratacao().getTimeInMillis());
+			stmt.setDate(4, data);
+			stmt.setInt(5, funcionario.getCodigo());
+			
+			stmt.executeUpdate();
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				conexao.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}

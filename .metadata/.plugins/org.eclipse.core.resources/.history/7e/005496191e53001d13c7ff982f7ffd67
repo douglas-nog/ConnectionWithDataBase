@@ -1,0 +1,42 @@
+package br.com.fintech.dao;
+
+import java.sql.Connection;
+
+public class OracleReceitaDAO implements ReceitaDAO{
+
+	
+	private Connection conexao;
+	
+	@Override
+	public void Cadastrar(Receita receita) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Receita> listar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void remover(int codigo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Receita buscaPorCD(int codigoBusca) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void atualizar(Receita receita) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+}

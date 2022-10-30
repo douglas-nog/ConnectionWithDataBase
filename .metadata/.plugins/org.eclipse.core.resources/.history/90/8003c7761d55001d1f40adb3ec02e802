@@ -1,0 +1,26 @@
+package br.com.fintech.teste;
+
+import java.util.Calendar;
+
+import br.com.fintech.bean.Despesa;
+import br.com.fintech.dao.OracleDespesaDAO;
+
+public class TesteCadastroDespesa {
+
+	public static void main(String[] args) {
+		
+		OracleDespesaDAO dao = new OracleDespesaDAO();
+		
+		Despesa despesa1 = new Despesa();
+		
+		despesa1.setCpf("08965474220");
+		despesa1.setValor_despesa(150);
+		despesa1.setDescricao("RESTAURANTE");
+		despesa1.setData_despesa(Calendar.getInstance());
+		despesa1.setTipo(10);
+		
+		dao.Cadastrar(despesa1);
+		
+	}
+
+}

@@ -1,0 +1,68 @@
+package br.com.fintech.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+
+import br.com.fintech.bean.Usuario;
+import br.com.fintech.jdbc.FintechDBManager;
+
+public class OracleUsuarioDAO implements UsuarioDAO{
+	
+	private Connection conexao;
+	
+	public void Cadastrar(Usuario usuario) {
+		
+		PreparedStatement stmt = null;
+		
+		try {
+			conexao = FintechDBManager.obterConexao();
+			String sql = "INSER INTO T_USUARIO(NR_CPF, NM_NOME, NM_SOBRENOME, DS_EMAIL, DS_SENHA) VALUES (?, ?, ?, ?, ?)";
+			stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, usuario.getCpf());
+			stmt.setString(2, usuario.getNome());
+			stmt.setString(3, usuario.getSobrenome());
+			stmt.setString(4, usuario.getEmail());
+			stmt.setString(4, usuario.getSenha());
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				conexao.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public List<Usuario> listar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void remover(int codigo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Usuario buscaPorCD(int codigoBusca) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void atualizar(Usuario usuario) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+}

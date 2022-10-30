@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+C:\Users\dougl\OneDrive\Área de Trabalho\TrabCap8\.metadata\.plugins\org.eclipse.jdt.core
+4071795124.index
+1865797976.index
+2039056864.index
+4000383251.index
